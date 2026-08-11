@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "tldr",
-      "version": "0.1.2",
+      "version": "0.1.3",
       "source": "./",
       "description": "Condense answers and text to their essential claims without losing meaning.",
       "author": { "name": "Asnari Pacalna" },
