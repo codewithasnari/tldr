@@ -8,15 +8,24 @@ import test from 'node:test';
 const workflowPath = resolve(import.meta.dirname, '../.github/workflows/ci.yml');
 const allowedActions = new Set(['actions/checkout', 'actions/setup-node']);
 
-test('CI uses only allowlisted actions pinned to full commit SHAs', async () => {
-  const workflow = await readFile(workflowPath, 'utf8');
-  const uses = [...workflow.matchAll(/^\s*- uses:\s*([^\s@]+)@([^\s#]+)/gm)];
-
+function assertSafeUses(workflow) {
+  const uses = [...workflow.matchAll(/\buses\s*:\s*["']?([^\s@"'},\]]+)@([^\s#"'},\]]+)/g)];
   assert.ok(uses.length > 0, 'CI must use at least one GitHub Action');
   for (const [, action, revision] of uses) {
     assert.ok(allowedActions.has(action), `${action} is not allowlisted`);
     assert.match(revision, /^[0-9a-f]{40}$/, `${action} must use a full 40-character commit SHA`);
   }
+}
+
+test('CI uses only allowlisted actions pinned to full commit SHAs', async () => {
+  const workflow = await readFile(workflowPath, 'utf8');
+  assertSafeUses(workflow);
+});
+
+test('CI policy inspects block, flow-style, and job-level uses syntax', () => {
+  const sha = '1'.repeat(40);
+  assert.doesNotThrow(() => assertSafeUses(`steps:\n  - uses: actions/checkout@${sha}\n  - { uses: actions/setup-node@${sha} }`));
+  assert.throws(() => assertSafeUses(`steps:\n  - uses: actions/checkout@${sha}\njobs:\n  attack:\n    uses: evil/reusable/.github/workflows/pwn.yml@${sha}`), /not allowlisted/);
 });
 
 test('repository metadata validator accepts the packaged plugin', () => {
@@ -45,6 +54,16 @@ test('repository metadata validator rejects inconsistent package identity', asyn
   await rejectMutation('CITATION.cff', (source) => source.replace('version: 0.1.1', 'version: 9.9.9'));
   await rejectMutation('CITATION.cff', (source) => source.replace('github.com/Kyaa-A/tldr', 'github.com/other/tldr'));
   await rejectMutation('.claude-plugin/marketplace.json', (source) => source.replace('"plugins": [\n    {\n      "name": "tldr"', '"plugins": [\n    {\n      "name": "other"'));
+  await rejectMutation('.claude-plugin/marketplace.json', (source) => {
+    const document = JSON.parse(source);
+    document.plugins.push({ ...document.plugins[0], name: 'other' });
+    return JSON.stringify(document);
+  });
+  await rejectMutation('.agents/plugins/marketplace.json', (source) => {
+    const document = JSON.parse(source);
+    document.plugins.push({ ...document.plugins[0], name: 'other' });
+    return JSON.stringify(document);
+  });
 });
 
 test('repository metadata validator rejects unsafe hook metadata', async () => {
