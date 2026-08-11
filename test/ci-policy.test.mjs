@@ -4,14 +4,32 @@ import { cp, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
+import { parse } from 'yaml';
 
 const workflowPath = resolve(import.meta.dirname, '../.github/workflows/ci.yml');
 const allowedActions = new Set(['actions/checkout', 'actions/setup-node']);
 
 function assertSafeUses(workflow) {
-  const uses = [...workflow.matchAll(/\buses\s*:\s*["']?([^\s@"'},\]]+)@([^\s#"'},\]]+)/g)];
+  const uses = [];
+  const visit = (value) => {
+    if (Array.isArray(value)) {
+      value.forEach(visit);
+      return;
+    }
+    if (value === null || typeof value !== 'object') return;
+    for (const [key, child] of Object.entries(value)) {
+      if (key === 'uses') uses.push(child);
+      visit(child);
+    }
+  };
+  visit(parse(workflow));
   assert.ok(uses.length > 0, 'CI must use at least one GitHub Action');
-  for (const [, action, revision] of uses) {
+  for (const reference of uses) {
+    assert.equal(typeof reference, 'string', 'uses must be a string');
+    const separator = reference.lastIndexOf('@');
+    assert.notEqual(separator, -1, `${reference} must include a revision`);
+    const action = reference.slice(0, separator);
+    const revision = reference.slice(separator + 1);
     assert.ok(allowedActions.has(action), `${action} is not allowlisted`);
     assert.match(revision, /^[0-9a-f]{40}$/, `${action} must use a full 40-character commit SHA`);
   }
@@ -26,6 +44,7 @@ test('CI policy inspects block, flow-style, and job-level uses syntax', () => {
   const sha = '1'.repeat(40);
   assert.doesNotThrow(() => assertSafeUses(`steps:\n  - uses: actions/checkout@${sha}\n  - { uses: actions/setup-node@${sha} }`));
   assert.throws(() => assertSafeUses(`steps:\n  - uses: actions/checkout@${sha}\njobs:\n  attack:\n    uses: evil/reusable/.github/workflows/pwn.yml@${sha}`), /not allowlisted/);
+  assert.throws(() => assertSafeUses(`steps:\n  - uses: actions/checkout@${sha}\njobs:\n  attack:\n    "uses": evil/reusable/.github/workflows/pwn.yml@${sha}`), /not allowlisted/);
 });
 
 test('repository metadata validator accepts the packaged plugin', () => {
