@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use tldr, please cite it using this metadata."
+title: tldr
+abstract: "A Claude Code and Codex skill for concise answers and summaries that preserve essential meaning."
+type: software
+version: 0.1.0
+authors:
+  - family-names: Pacalna
+    given-names: Asnari
+    alias: Kyaa-A
+repository-code: "https://github.com/Kyaa-A/tldr"
+url: "https://github.com/Kyaa-A/tldr"
+license: MIT
+keywords:
+  - claude-code
+  - codex
+  - skill
+  - tldr
+  - summarization
