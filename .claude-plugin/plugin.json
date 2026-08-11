@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "tldr",
+  "description": "Condense answers and text to their essential claims without losing meaning.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Asnari Pacalna",
+    "url": "https://github.com/Kyaa-A"
+  },
+  "homepage": "https://github.com/Kyaa-A/tldr",
+  "repository": "https://github.com/Kyaa-A/tldr",
+  "license": "MIT",
+  "keywords": ["tldr", "summarize", "concise", "condense", "claude-code", "codex"]
+}

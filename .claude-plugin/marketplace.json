@@ -1,0 +1,21 @@
+{
+  "name": "tldr",
+  "owner": {
+    "name": "Asnari Pacalna",
+    "email": "asnaripacalna@gmail.com"
+  },
+  "description": "Marketplace for the TLDR concise-response skill.",
+  "plugins": [
+    {
+      "name": "tldr",
+      "source": "./",
+      "description": "Condense answers and text to their essential claims without losing meaning.",
+      "author": { "name": "Asnari Pacalna" },
+      "homepage": "https://github.com/Kyaa-A/tldr",
+      "repository": "https://github.com/Kyaa-A/tldr",
+      "license": "MIT",
+      "keywords": ["tldr", "summarize", "concise", "condense"],
+      "category": "productivity"
+    }
+  ]
+}

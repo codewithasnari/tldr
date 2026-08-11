@@ -1,0 +1,28 @@
+{
+  "name": "tldr",
+  "version": "0.1.0",
+  "description": "Condense answers and text to their essential claims without losing meaning.",
+  "author": {
+    "name": "Asnari Pacalna",
+    "url": "https://github.com/Kyaa-A"
+  },
+  "homepage": "https://github.com/Kyaa-A/tldr",
+  "repository": "https://github.com/Kyaa-A/tldr",
+  "license": "MIT",
+  "keywords": ["tldr", "summarize", "concise", "condense"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "TLDR",
+    "shortDescription": "Cut answers down to essentials",
+    "longDescription": "Condense answers and text to essential claims while preserving meaning and useful structure.",
+    "developerName": "Asnari Pacalna",
+    "category": "Productivity",
+    "capabilities": ["Skills"],
+    "websiteURL": "https://github.com/Kyaa-A/tldr",
+    "defaultPrompt": [
+      "Summarize the previous answer.",
+      "Make this more concise.",
+      "Cut the fluff from this text."
+    ]
+  }
+}
