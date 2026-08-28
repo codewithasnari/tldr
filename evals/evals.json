@@ -1,0 +1,32 @@
+[
+  {
+    "id": "prose",
+    "prompt": "TLDR: The deploy was delayed because the database migration took twelve minutes, exceeded the ten-minute health-check window, and caused the platform to roll back even though the application code started correctly.",
+    "expected": ["keeps the migration cause", "keeps the timeout and rollback outcome", "substantially shortens the prose"],
+    "forbidden": ["adds a new diagnosis", "introductory preamble"]
+  },
+  {
+    "id": "list",
+    "prompt": "Condense this list: 1. Run typecheck to find TypeScript errors. 2. Run unit tests to find logic regressions. 3. Run the build to catch bundling failures. 4. Deploy only after all three pass.",
+    "expected": ["preserves list structure", "keeps all four distinct actions", "removes redundant wording"],
+    "forbidden": ["turns it into prose", "drops the deploy condition"]
+  },
+  {
+    "id": "code",
+    "prompt": "TLDR explain `const active = users.filter((user) => user.active);` and do not change the code.",
+    "expected": ["keeps the code unchanged", "states that inactive users are excluded", "uses at most three sentences"],
+    "forbidden": ["rewrites the expression", "adds multiple examples"]
+  },
+  {
+    "id": "bare-trigger",
+    "prompt": "Previous answer: The API retries twice with exponential backoff, then returns the final upstream error to the caller. User: tldr",
+    "expected": ["rewrites the previous answer", "keeps retry count and error behavior", "does not answer a new question"],
+    "forbidden": ["asks for text", "drops the final error behavior"]
+  },
+  {
+    "id": "load-bearing-caveat",
+    "prompt": "Make concise: You can cache this response for one hour, except responses containing personal health information must never enter the shared cache.",
+    "expected": ["keeps the one-hour rule", "keeps the health-information exception", "shortens without weakening safety"],
+    "forbidden": ["drops the exception", "claims every response is cacheable"]
+  }
+]
