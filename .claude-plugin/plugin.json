@@ -5,10 +5,10 @@
   "version": "0.1.4",
   "author": {
     "name": "Asnari Pacalna",
-    "url": "https://github.com/Kyaa-A"
+    "url": "https://github.com/codewithasnari"
   },
-  "homepage": "https://github.com/Kyaa-A/tldr",
-  "repository": "https://github.com/Kyaa-A/tldr",
+  "homepage": "https://github.com/codewithasnari/tldr",
+  "repository": "https://github.com/codewithasnari/tldr",
   "license": "MIT",
   "keywords": ["tldr", "summarize", "concise", "condense", "claude-code", "codex"]
 }

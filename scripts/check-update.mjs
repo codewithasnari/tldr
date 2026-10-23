@@ -7,14 +7,14 @@ import { join } from 'node:path';
 const CONFIG = {
   claude: {
     manifest: '.claude-plugin/plugin.json',
-    remote: 'https://raw.githubusercontent.com/Kyaa-A/tldr/main/.claude-plugin/plugin.json',
+    remote: 'https://raw.githubusercontent.com/codewithasnari/tldr/main/.claude-plugin/plugin.json',
     message(installed, latest) {
       return `tldr ${installed} -> ${latest} update available\nRun:\n  claude plugin marketplace update tldr\n  claude plugin update tldr@tldr\nThen restart Claude Code or run /reload-plugins.`;
     },
   },
   codex: {
     manifest: '.codex-plugin/plugin.json',
-    remote: 'https://raw.githubusercontent.com/Kyaa-A/tldr/main/.codex-plugin/plugin.json',
+    remote: 'https://raw.githubusercontent.com/codewithasnari/tldr/main/.codex-plugin/plugin.json',
     message(installed, latest) {
       return `tldr ${installed} -> ${latest} update available\nRun:\n  codex plugin marketplace upgrade tldr\n  codex plugin remove tldr@tldr\n  codex plugin add tldr@tldr\nThen start a new Codex session.`;
     },

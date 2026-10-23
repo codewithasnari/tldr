@@ -7,9 +7,9 @@ version: 0.1.4
 authors:
   - family-names: Pacalna
     given-names: Asnari
-    alias: Kyaa-A
-repository-code: "https://github.com/Kyaa-A/tldr"
-url: "https://github.com/Kyaa-A/tldr"
+    alias: codewithasnari
+repository-code: "https://github.com/codewithasnari/tldr"
+url: "https://github.com/codewithasnari/tldr"
 license: MIT
 keywords:
   - claude-code

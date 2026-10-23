@@ -12,8 +12,8 @@
       "source": "./",
       "description": "Condense answers and text to their essential claims without losing meaning.",
       "author": { "name": "Asnari Pacalna" },
-      "homepage": "https://github.com/Kyaa-A/tldr",
-      "repository": "https://github.com/Kyaa-A/tldr",
+      "homepage": "https://github.com/codewithasnari/tldr",
+      "repository": "https://github.com/codewithasnari/tldr",
       "license": "MIT",
       "keywords": ["tldr", "summarize", "concise", "condense"],
       "category": "productivity"

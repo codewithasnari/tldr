@@ -9,7 +9,7 @@ A concise-response skill for Claude Code and Codex. It strips output to its esse
 Run these commands inside Claude Code:
 
 ```text
-/plugin marketplace add Kyaa-A/tldr
+/plugin marketplace add codewithasnari/tldr
 /plugin install tldr@tldr
 ```
 
@@ -18,7 +18,7 @@ The managed plugin includes startup update notices. The notice is informational 
 ### Codex plugin
 
 ```bash
-codex plugin marketplace add Kyaa-A/tldr
+codex plugin marketplace add codewithasnari/tldr
 codex plugin add tldr@tldr
 ```
 
@@ -27,7 +27,7 @@ Start a fresh Codex session, open `/hooks`, review the command, and trust it bef
 ### Plain skill copy
 
 ```bash
-git clone https://github.com/Kyaa-A/tldr.git
+git clone https://github.com/codewithasnari/tldr.git
 cp -r tldr/skills/tldr ~/.claude/skills/tldr
 # Codex:
 cp -r tldr/skills/tldr ~/.agents/skills/tldr

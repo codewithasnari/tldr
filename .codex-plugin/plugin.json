@@ -4,10 +4,10 @@
   "description": "Condense answers and text to their essential claims without losing meaning.",
   "author": {
     "name": "Asnari Pacalna",
-    "url": "https://github.com/Kyaa-A"
+    "url": "https://github.com/codewithasnari"
   },
-  "homepage": "https://github.com/Kyaa-A/tldr",
-  "repository": "https://github.com/Kyaa-A/tldr",
+  "homepage": "https://github.com/codewithasnari/tldr",
+  "repository": "https://github.com/codewithasnari/tldr",
   "license": "MIT",
   "keywords": ["tldr", "summarize", "concise", "condense"],
   "skills": "./skills/",
@@ -18,7 +18,7 @@
     "developerName": "Asnari Pacalna",
     "category": "Productivity",
     "capabilities": ["Skills"],
-    "websiteURL": "https://github.com/Kyaa-A/tldr",
+    "websiteURL": "https://github.com/codewithasnari/tldr",
     "defaultPrompt": [
       "Summarize the previous answer.",
       "Make this more concise.",
